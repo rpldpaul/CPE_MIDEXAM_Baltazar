@@ -1,0 +1,26 @@
+---
+- name: Install Elasticsearch
+  hosts: centos, ubuntu
+  become: true
+  roles:
+   - elasticsearch
+   - elasticsearchubuntu
+
+- name: Install Kibana
+  hosts: ubuntu
+  become: true
+  roles:
+   - kibana
+
+- name: Install Logstash
+  hosts: ubuntu
+  become: true
+  roles:
+   - logstash
+
+- name: Install Nagios
+  hosts: ubuntu
+  become: true
+  roles:
+    - nagios
+

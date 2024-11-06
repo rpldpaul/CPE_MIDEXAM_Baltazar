@@ -1,0 +1,42 @@
+- name: Installing Java
+  tags: elasticsearch
+  apt:
+    name: default-jre
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+#- name: Installing Elastic Search repository
+#  tags: elasticsearch
+#  apt:
+#    name: elasticsearch
+#    description: Elasticsearch Repository
+#    baseurl: https://artifacts.elastic.co/packages/7.x/yum
+#    gpgcheck: yes
+#    gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+#    enabled: yes
+#  when: ansible_distribution == "Ubuntu"
+
+- name: Elastic Search Installation
+  tags: elasticsearch
+  apt:
+    name: elasticsearch
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: Configuring Elastic Search
+  tags: elasticsearch
+  template:
+   src: elasticsearch.yml.j2
+   dest: /etc/elasticsearch/elasticsearch.yml
+  when: ansible_distribution == "Ubuntu"
+
+- name: Starting Elastic Search
+  tags: elasticsearch
+  service:
+    name: elasticsearch
+    state: restarted
+    enabled: yes
+  when: ansible_distribution == "Ubuntu"
+
+
+

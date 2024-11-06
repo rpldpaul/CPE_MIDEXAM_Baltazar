@@ -1,0 +1,54 @@
+---
+- name: Install Elasticsearch
+  hosts: CentOS
+  become: true
+  roles:
+   - elasticsearch
+
+- name: Install Kibana
+  hosts: Ubuntu
+  become: true
+  roles:
+   - kibana
+
+- name: Install Logstash
+  hosts: Ubuntu
+  become: true
+  roles:
+   - logstash
+
+- name: Install Nagios in Ubuntu
+  hosts: Ubuntu
+  become: yes
+  roles:
+    - nagios
+
+- name: Install Prometheus
+  hosts: Ubuntu,CentOS
+  become: yes
+
+  roles:
+    - role: ubuntuprometheus
+      when: ansible_distribution == "Ubuntu"
+    - role: centosprometheus
+      when: ansible_distribution == "CentOS"
+
+- name: Install InfluxDB
+  hosts: Ubuntu, CentOS
+  roles:
+    - influxdb
+    
+- name: Install Grafana
+  hosts: Ubuntu, CentOS
+  roles:
+    - grafana
+
+- name: Install httpd,php,mariadb
+  hosts: Ubuntu,CentOS
+  become: yes
+  roles:
+    - apache
+    - php
+    - mariadb
+
+
