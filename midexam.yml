@@ -24,3 +24,8 @@
   roles:
     - nagios
 
+- name: Install MariaDB
+  hosts: ubuntu, centos
+  become: true
+  roles: 
+    - mariadb
