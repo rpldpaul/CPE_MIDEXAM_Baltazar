@@ -102,7 +102,7 @@
 
   - name: Set Nagios admin password
     tags: nagios
-    command: htpasswd -b -c /usr/local/nagios/etc/htpasswd.users zamora_admin "sample"
+    command: htpasswd -b -c /usr/local/nagios/etc/htpasswd.users paul_admin "sample"
 
   - name: Enable and start Apache/Httpd service on Ubuntu
     tags: nagios
